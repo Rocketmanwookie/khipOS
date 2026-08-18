@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+- Added a project master prompt for future KHIP OS continuation sessions.
+- Started Milestone 2 with an observe-only workspace explorer adapter.
+- Added packet logging for workspace listings through `ContextFrame` records.
+- Added tests for workspace listing and path escape rejection.
+
 ## 0.1.0-alpha.1 - 2026-08-18
 
 - Established Linux distribution-layer architecture.

@@ -16,7 +16,7 @@ class RouterTests(unittest.TestCase):
 class RuntimeTests(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
-        self.runtime = Runtime(Path(self.temp.name))
+        self.runtime = Runtime(Path(self.temp.name), workspace_root=Path(self.temp.name))
 
     def tearDown(self):
         self.temp.cleanup()
@@ -37,6 +37,22 @@ class RuntimeTests(unittest.TestCase):
     def test_empty_intent_is_rejected(self):
         with self.assertRaises(ValueError):
             self.runtime.handle_intent(" ")
+
+    def test_workspace_explorer_lists_entries_without_git_noise(self):
+        (Path(self.temp.name) / "alpha.txt").write_text("alpha", encoding="utf-8")
+        (Path(self.temp.name) / "zeta").mkdir()
+        (Path(self.temp.name) / ".git").mkdir()
+
+        result = self.runtime.explore_workspace()
+
+        names = [entry["name"] for entry in result["listing"]["entries"]]
+        self.assertEqual(names, ["projects", "zeta", "alpha.txt"])
+        self.assertEqual(result["context"]["packet_type"], "ContextFrame")
+        self.assertEqual(result["context"]["payload"]["permission"], "observe")
+
+    def test_workspace_explorer_rejects_path_escape(self):
+        with self.assertRaises(ValueError):
+            self.runtime.explore_workspace("../")
 
 
 if __name__ == "__main__":

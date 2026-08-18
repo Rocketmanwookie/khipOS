@@ -7,6 +7,7 @@ from uuid import uuid4
 
 from .agents import AGENTS, make_plan, route_agent
 from .protocol import Packet, PacketType
+from .workspace import WorkspaceExplorer
 
 
 SENSITIVE = re.compile(
@@ -16,8 +17,10 @@ SENSITIVE = re.compile(
 
 
 class Runtime:
-    def __init__(self, data_dir: Path):
+    def __init__(self, data_dir: Path, workspace_root: Path | None = None):
         self.data_dir = data_dir
+        self.workspace_root = (workspace_root or Path.cwd()).resolve()
+        self.workspace = WorkspaceExplorer(self.workspace_root)
         self.projects_dir = data_dir / "projects"
         self.events_path = data_dir / "events.jsonl"
         self.projects_dir.mkdir(parents=True, exist_ok=True)
@@ -36,6 +39,21 @@ class Runtime:
 
     def list_projects(self) -> list[dict]:
         return [json.loads(path.read_text(encoding="utf-8")) for path in sorted(self.projects_dir.glob("*.json"))]
+
+    def explore_workspace(self, relative_path: str = ".") -> dict:
+        listing = self.workspace.list_entries(relative_path)
+        packet = self.append(
+            Packet(
+                PacketType.CONTEXT,
+                {
+                    "adapter": "workspace_explorer",
+                    "permission": "observe",
+                    "listing": listing,
+                },
+                "workspace_explorer",
+            )
+        )
+        return {"listing": listing, "context": packet}
 
     def handle_intent(self, text: str, project_id: str | None = None) -> dict:
         text = text.strip()
@@ -60,4 +78,9 @@ class Runtime:
         return {"intent": intent, "agent": agent.to_dict(), "plan": plan_packet, "approval": approval}
 
     def status(self) -> dict:
-        return {"version": "0.1.0-alpha.1", "mode": "local-prototype", "agents": [a.to_dict() for a in AGENTS.values()]}
+        return {
+            "version": "0.1.0-alpha.1",
+            "mode": "local-prototype",
+            "workspace_root": str(self.workspace_root),
+            "agents": [a.to_dict() for a in AGENTS.values()],
+        }

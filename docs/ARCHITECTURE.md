@@ -32,6 +32,14 @@ This keeps routing, approvals, logging, and future remote agents inspectable.
 
 Configuration order remains Defaults → System → User → Workspace → Runtime.
 
+## Adapter boundary
+
+Milestone 2 starts adapters as explicit, permission-scoped runtime surfaces. The
+first adapter is `workspace_explorer`, an Observe-level adapter that lists files
+under the configured workspace root and records a `ContextFrame`. It does not
+read file contents, write files, execute commands, or follow paths outside the
+workspace.
+
 ## Initial technology choices
 
 - Base OS: Ubuntu-family Linux for broad hardware and dual-boot support

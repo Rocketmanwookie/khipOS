@@ -5,7 +5,7 @@ from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 import json
 from pathlib import Path
 import sys
-from urllib.parse import urlparse
+from urllib.parse import parse_qs, urlparse
 
 from .runtime import Runtime
 
@@ -39,6 +39,9 @@ class Handler(SimpleHTTPRequestHandler):
             return self.send_json(200, self.runtime.status())
         if path == "/api/projects":
             return self.send_json(200, self.runtime.list_projects())
+        if path == "/api/workspace":
+            query = parse_qs(urlparse(self.path).query)
+            return self.send_json(200, self.runtime.explore_workspace(query.get("path", ["."])[0]))
         super().do_GET()
 
     def do_POST(self) -> None:
@@ -60,7 +63,7 @@ def main() -> None:
     parser.add_argument("--data", default="data")
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[2]
-    Handler.runtime = Runtime(Path(args.data).resolve())
+    Handler.runtime = Runtime(Path(args.data).resolve(), workspace_root=root)
     Handler.ui_dir = root / "ui"
     server = ThreadingHTTPServer((args.host, args.port), Handler)
     print(f"KHIP OS running at http://{args.host}:{args.port}")

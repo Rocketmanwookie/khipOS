@@ -18,6 +18,7 @@ history, and approval boundary.
 - Project creation and persistent local project records
 - KHIP-style packets for intents, plans, approvals, actions, and feedback
 - Approval requests for consequential commands
+- Read-only workspace explorer for repository/project inspection
 - Local-only HTTP service with no telemetry or cloud calls
 - Unit tests for routing, projects, packets, and approvals
 
@@ -54,7 +55,7 @@ PYTHONPATH=src python3 -m unittest discover -s tests -v
 - `src/ai_os/`: local runtime, protocol, routing, and HTTP API
 - `ui/`: voice-first desktop shell
 - `tests/`: deterministic unit tests
-- `docs/`: architecture, safety model, roadmap, and decisions
+- `docs/`: architecture, safety model, roadmap, master prompt, and decisions
 - `image/`: future live-image configuration boundary
 - `scripts/`: development and verification entry points
 
