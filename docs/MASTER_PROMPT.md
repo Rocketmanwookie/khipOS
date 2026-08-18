@@ -31,7 +31,8 @@ Core architecture:
 
 Voice direction:
 - Evaluate OpenWhisper as the preferred candidate for dictation and command
-  control before adding a voice dependency.
+  control before adding a voice dependency. Use `docs/VOICE.md` as the
+  evaluation plan.
 - Voice control should reduce dependence on keyboard and mouse for ordinary
   work, while preserving those inputs for editing precision, accessibility, and
   explicit override.

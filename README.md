@@ -55,7 +55,7 @@ PYTHONPATH=src python3 -m unittest discover -s tests -v
 - `src/ai_os/`: local runtime, protocol, routing, and HTTP API
 - `ui/`: voice-first desktop shell
 - `tests/`: deterministic unit tests
-- `docs/`: architecture, safety model, roadmap, master prompt, and decisions
+- `docs/`: architecture, safety model, voice plan, roadmap, master prompt, and decisions
 - `image/`: future live-image configuration boundary
 - `scripts/`: development and verification entry points
 

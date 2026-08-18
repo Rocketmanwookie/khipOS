@@ -9,6 +9,8 @@
 - Updated the master prompt with the voice-first interaction thesis,
   OpenWhisper evaluation target, descriptive-comment guidance, and next
   milestone questions.
+- Added a voice interface plan for OpenWhisper evaluation, dictation versus
+  command modes, approval speech, and first-adapter acceptance criteria.
 
 ## 0.1.0-alpha.1 - 2026-08-18
 

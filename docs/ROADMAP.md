@@ -9,7 +9,8 @@ sensitive intents stop at approval; tests pass; architecture is documented.
 ## Milestone 2 — Useful coding partner
 
 - Started: read-only workspace explorer adapter with packet logging
-- Evaluate OpenWhisper for local dictation and command control
+- Evaluate OpenWhisper for local dictation and command control using
+  `docs/VOICE.md`
 - Connect a configurable local or hosted language model
 - Add sandboxed filesystem and terminal adapters
 - Add repository/project explorer and diff review
