@@ -40,7 +40,13 @@ browsers normally require microphone permission. Text input always works.
 ## Test
 
 ```bash
-python3 -m unittest discover -s tests -v
+./scripts/verify.sh
+```
+
+Or run the unit tests directly:
+
+```bash
+PYTHONPATH=src python3 -m unittest discover -s tests -v
 ```
 
 ## Repository map
