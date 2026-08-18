@@ -6,6 +6,9 @@
 - Started Milestone 2 with an observe-only workspace explorer adapter.
 - Added packet logging for workspace listings through `ContextFrame` records.
 - Added tests for workspace listing and path escape rejection.
+- Updated the master prompt with the voice-first interaction thesis,
+  OpenWhisper evaluation target, descriptive-comment guidance, and next
+  milestone questions.
 
 ## 0.1.0-alpha.1 - 2026-08-18
 
