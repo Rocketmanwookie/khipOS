@@ -10,6 +10,8 @@ required for common command, dictation, navigation, and approval flows.
 - Make voice input fast enough that it feels natural for everyday work.
 - Support both dictation and command/control without mixing their safety rules.
 - Keep listening state visible and user-controlled.
+- Show live input level and clipping warnings so users can diagnose microphone
+  gain before blaming transcription quality.
 - Prefer local/private speech processing when practical.
 - Keep raw audio out of persistent storage unless the user explicitly enables a
   diagnostic mode.
@@ -46,6 +48,19 @@ Speech input must stay separated into explicit stages:
 
 Transcription alone never implies execution. A transcript is input evidence, not
 permission to act.
+
+## Microphone level diagnostics
+
+The browser shell includes a live microphone meter that uses Web Audio to show
+RMS loudness, peak hold, and clipping risk while listening. This is a diagnostic
+surface only. The current Web Speech API path does not expose a reliable way for
+KHIP OS to lower the microphone gain before recognition, so users should adjust
+input gain in operating-system or browser settings when the meter reaches the
+red clipping zone.
+
+When KHIP OS owns the speech-to-text pipeline through OpenWhisper or another
+adapter, software gain, normalization, and automatic clipping protection can be
+evaluated inside that adapter boundary.
 
 ## Modes
 

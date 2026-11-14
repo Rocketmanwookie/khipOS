@@ -24,6 +24,17 @@
         <button id="send" class="primary">Plan task →</button>
       </div>
       <p id="mic-note" class="note">Microphone is off.</p>
+      <div class="meter" aria-label="Microphone level">
+        <div class="meter-row">
+          <span>Mic level</span>
+          <output id="mic-db">idle</output>
+        </div>
+        <div class="meter-track">
+          <div id="mic-level" class="meter-fill"></div>
+          <div id="mic-peak" class="meter-peak"></div>
+        </div>
+        <p id="mic-health" class="note">Start listening to check input level.</p>
+      </div>
     </section>
     <section id="result" class="result hidden" aria-live="polite"></section>
     <section class="lower">

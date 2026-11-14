@@ -11,6 +11,8 @@
   milestone questions.
 - Added a voice interface plan for OpenWhisper evaluation, dictation versus
   command modes, approval speech, and first-adapter acceptance criteria.
+- Added a live browser microphone level meter with hot/clipping guidance for
+  speech-recognition troubleshooting.
 
 ## 0.1.0-alpha.1 - 2026-08-18
 

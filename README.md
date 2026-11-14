@@ -12,6 +12,7 @@ history, and approval boundary.
 ## What works now
 
 - Voice input through the browser's Web Speech API when supported
+- Live microphone level meter with clipping warnings for voice troubleshooting
 - Keyboard input and conventional mouse controls
 - Visible microphone state; listening never starts silently
 - Routing to specialist agents: General, Code, Writing, Spreadsheet, Web, CAD
